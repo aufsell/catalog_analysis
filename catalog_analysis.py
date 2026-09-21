@@ -97,6 +97,15 @@ def format_report_line(movie):
     genres = ", ".join(sorted(movie["genres"]))
     return f'"{title}" ({year}) — {rating}/10, {duration}, жанры: {genres}'
 
+def titles_sorted_by_rating(movies):
+    ordered = sorted(movies, key=lambda m: m["rating"], reverse=True)
+    return [m["title"] for m in ordered]
+
+
+def top_n_by_rating(movies, n=3):
+    ordered = sorted(movies, key=lambda m: m["rating"], reverse=True)
+    return [(m["title"], m["rating"]) for m in ordered[:n]]
+
 if __name__ == "__main__":
     print(average_rating(movies))
     print(catalog_age_stats(movies))
@@ -107,3 +116,5 @@ if __name__ == "__main__":
     find_first_blockbuster(movies)
     print(count_long_movies(movies))
     print(format_report_line(movies[1]))
+    print(titles_sorted_by_rating(movies))
+    print(top_n_by_rating(movies))
