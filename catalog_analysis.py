@@ -106,6 +106,26 @@ def top_n_by_rating(movies, n=3):
     ordered = sorted(movies, key=lambda m: m["rating"], reverse=True)
     return [(m["title"], m["rating"]) for m in ordered[:n]]
 
+def count_by_genre(movies):
+    counts = {}
+    for movie in movies:
+        for genre in movie["genres"]:
+            counts[genre] = counts.get(genre, 0) + 1
+    return counts
+
+
+def actor_filmography(movies):
+    filmography = {}
+    for movie in movies:
+        for actor in movie["actors"]:
+            filmography.setdefault(actor, []).append(movie["title"])
+    return filmography
+
+
+def above_average_movies(movies):
+    avg = average_rating(movies)
+    return {m["title"]: m["rating"] for m in movies if m["rating"] > avg}
+
 if __name__ == "__main__":
     print(average_rating(movies))
     print(catalog_age_stats(movies))
@@ -118,3 +138,7 @@ if __name__ == "__main__":
     print(format_report_line(movies[1]))
     print(titles_sorted_by_rating(movies))
     print(top_n_by_rating(movies))
+    print("step-6")
+    print(count_by_genre(movies))
+    print(actor_filmography(movies))
+    print(above_average_movies(movies))
