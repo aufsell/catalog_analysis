@@ -145,26 +145,26 @@ def iter_high_rated(movies, min_rating=8.0):
 
 total_duration = sum(m["duration_min"] for m in movies if m["rating"] > 7)
 
+
+def build_report(movies):
+    print("ОТЧЕТ ПО КАТАЛОГУ")
+    print(f"Средний рейтинг: {average_rating(movies)}")
+
+    _, _, avg_age = catalog_age_stats(movies)
+    print(f"Средний возраст фильмов: {avg_age} лет")
+
+    print("\nТоп-3 фильма:")
+    ordered = sorted(movies, key=lambda m: m["rating"], reverse=True)
+    for movie in ordered[:3]:
+        print(f"  {format_report_line(movie)}")
+
+    print("\nФильмов по жанрам:")
+    counts = count_by_genre(movies)
+    for genre, count in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0])):
+        print(f"  {genre} — {count}")
+
+    genres_line = ", ".join(sorted(all_genres(movies)))
+    print(f"\nВсе жанры каталога: {genres_line}")
+
 if __name__ == "__main__":
-    # print(average_rating(movies))
-    # print(catalog_age_stats(movies))
-    # print(duration_in_hours(155))
-    # print(rating_tier(8.5))
-    # print(decade_label(2022))
-    # print_non_comedy_titles(movies)
-    # find_first_blockbuster(movies)
-    # print(count_long_movies(movies))
-    # print(format_report_line(movies[1]))
-    # print(titles_sorted_by_rating(movies))
-    # print(top_n_by_rating(movies))
-    # print("step-6")
-    # print(count_by_genre(movies))
-    # print(actor_filmography(movies))
-    # print(above_average_movies(movies))
-    # print("step-7")
-    # print(all_genres(movies))
-    # print(common_actors(movies[0], movies[3]))
-    # print(genres_only_in_one(movies[5:6], movies[:5]))
-    for movie in iter_high_rated(movies):
-        print(format_report_line(movie))
-    print(total_duration)
+    build_report(movies)
