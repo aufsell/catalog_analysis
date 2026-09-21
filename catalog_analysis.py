@@ -1,3 +1,5 @@
+import math
+
 movies = [
     {"title": "The Dune Chronicles", "year": 2021, "genres": {"sci-fi", "drama"},
      "rating": 8.6, "duration_min": 155, "actors": ["T. Chalamet", "R. Ferguson", "O. Isaac"]}, # noqa: E501
@@ -26,5 +28,14 @@ def average_rating(movies):
         return 0.0
     return round(sum(movie["rating"] for movie in movies) / len(movies),1)
 
+def catalog_age_stats(movies, current_year = 2026):
+    if not movies:
+        return (0, 0, 0)
+    ages = [current_year - movie["year"] for movie in movies]
+    return (max(ages), min(ages), math.ceil(sum(ages) / len(ages)))
+    
+
+
 if __name__ == "__main__":
     print(average_rating(movies))
+    print(catalog_age_stats(movies))
