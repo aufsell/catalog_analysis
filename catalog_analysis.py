@@ -83,6 +83,20 @@ def count_long_movies(movies, threshold=120):
     return count
 
 
+def normalize_title(title):
+    return " ".join(w[0].upper() + w[1:] for w in title.split())
+
+def make_slug(title):
+    return title.lower().replace(" ", "-")
+
+def format_report_line(movie):
+    title = movie["title"]
+    year = movie["year"]
+    rating = movie["rating"]
+    duration = duration_in_hours(movie["duration_min"])
+    genres = ", ".join(sorted(movie["genres"]))
+    return f'"{title}" ({year}) — {rating}/10, {duration}, жанры: {genres}'
+
 if __name__ == "__main__":
     print(average_rating(movies))
     print(catalog_age_stats(movies))
@@ -92,3 +106,4 @@ if __name__ == "__main__":
     print_non_comedy_titles(movies)
     find_first_blockbuster(movies)
     print(count_long_movies(movies))
+    print(format_report_line(movies[1]))
