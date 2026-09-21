@@ -118,7 +118,7 @@ def actor_filmography(movies):
     filmography = {}
     for movie in movies:
         for actor in movie["actors"]:
-            filmography.setdefault(actor, []).append(movie["title"])
+            filmography[actor] = filmography.get(actor, []) + [movie["title"]]
     return filmography
 
 
