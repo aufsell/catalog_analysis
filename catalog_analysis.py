@@ -37,7 +37,18 @@ def catalog_age_stats(movies, current_year = 2026):
 def duration_in_hours(minutes):
     return f'{minutes // 60}ч {minutes % 60}м'
 
+def rating_tier(rating):
+    if rating >= 9.0:
+        return "шедевр"
+    elif rating >= 7.0:
+        return "хорошо"
+    elif rating >= 5.0:
+        return "средне"
+    else:
+        return "слабо" if rating >= 0 else "некорректная оценка"
+
 if __name__ == "__main__":
     print(average_rating(movies))
     print(catalog_age_stats(movies))
     print(duration_in_hours(155))
+    print(rating_tier(8.5))
