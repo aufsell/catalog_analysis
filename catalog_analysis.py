@@ -34,8 +34,10 @@ def catalog_age_stats(movies, current_year = 2026):
     ages = [current_year - movie["year"] for movie in movies]
     return (max(ages), min(ages), math.ceil(sum(ages) / len(ages)))
     
-
+def duration_in_hours(minutes):
+    return f'{minutes // 60}ч {minutes % 60}м'
 
 if __name__ == "__main__":
     print(average_rating(movies))
     print(catalog_age_stats(movies))
+    print(duration_in_hours(155))
