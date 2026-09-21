@@ -47,8 +47,18 @@ def rating_tier(rating):
     else:
         return "слабо" if rating >= 0 else "некорректная оценка"
 
+def decade_label(year):
+    match year:
+        case y if y > 2020:
+            return "новые"
+        case y if 2015 <= y <= 2020:
+            return "недавние"
+        case _:
+            return "старые"
+
 if __name__ == "__main__":
     print(average_rating(movies))
     print(catalog_age_stats(movies))
     print(duration_in_hours(155))
     print(rating_tier(8.5))
+    print(decade_label(2022))
